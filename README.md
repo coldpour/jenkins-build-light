@@ -3,6 +3,8 @@ Jenkins Build Light
 
 Webapp that displays the status of several jenkins jobs even across multiple servers
 
+![JenkinsBuildLight](JenkinsBuildLight.png)
+
 To Hack
 -------
 
