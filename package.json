@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "webapp that displays the status of several jenkins jobs even across multiple servers",
   "scripts": {
-    "start": "webpack-dev-server --inline --no-info --content-base src",
+    "start": "webpack-dev-server --progress --colors",
     "proxy": "./bin/proxy.js"
   },
   "author": "Mike Holm <coldpour@gmail.com>",

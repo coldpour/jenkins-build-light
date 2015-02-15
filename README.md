@@ -12,11 +12,11 @@ To Hack
 git clone https://github.com/coldpour/jenkins-build-light.git
 cd jenkins-build-light
 npm install
-bin/proxy.js &
+bin/proxy &
 npm start
 ```
 
-Then visit http://localhost:8080.
+Then visit http://localhost:8080/webpack-dev-server/bundle.
 
 This runs the webpack dev server, any changes you make to javascript or css
 files in `src` will cause the browser to reload live. The proxy server code
