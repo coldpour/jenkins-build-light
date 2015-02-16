@@ -1,4 +1,5 @@
 var React = require('react');
+var { POLL_FREQUENCY } = require('../Constants.js');
 var BuildsStore = require('../stores/BuildsStore');
 var ViewActionCreators = require('../actions/ViewActionCreators');
 var LightGrid = require('./LightGrid');
@@ -10,7 +11,7 @@ var App = React.createClass({
 
   componentDidMount () {
     BuildsStore.addChangeListener(this.handleStoreChange);
-    ViewActionCreators.loadBuilds();
+    window.setInterval(ViewActionCreators.loadBuilds, POLL_FREQUENCY);
   },
 
   componentWillUnmount () {
@@ -19,12 +20,6 @@ var App = React.createClass({
 
   handleStoreChange () {
     this.setState(BuildsStore.getState());
-  },
-
-  renderBuilds () {
-    return this.state.contacts.map((contact) => {
-      return <li>{contact.first} {contact.last}</li>;
-    });
   },
 
   render () {

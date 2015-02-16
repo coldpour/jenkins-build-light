@@ -2,6 +2,7 @@ var keyMirror = require('react/lib/keyMirror');
 
 module.exports = {
   PROXY_PORT: 9090,
+  POLL_FREQUENCY: 5000,
 
   BUILDS: [
     'churro.ci.f4tech.com/job/churro',

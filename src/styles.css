@@ -1,13 +1,16 @@
 .light {
   border-radius: .8rem;
-  min-height: 4rem;
   list-style: none;
   margin: 1rem;
+  min-height: 4rem;
+  padding: 1rem;
 }
 
 .light-stat {
-  opacity: .3;
+  bottom: -1.5rem;
   font-size: 1.2rem;
+  opacity: .3;
+  position: relative;
 }
 
 .link {
@@ -18,12 +21,20 @@
   text-decoration: none;
 }
 
+.duration {
+  float: right;
+}
+
+.number {
+  float: left;
+}
+
 .light-name:hover {
   text-decoration: underline;
 }
 
 .blue {
-  background-color: green;
+  background-color: darkgreen;
 }
 
 .blue-anime {
@@ -31,7 +42,7 @@
 }
 
 .red {
-  background-color: red;
+  background-color: darkred;
 }
 
 .red-anime {

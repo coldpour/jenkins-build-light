@@ -1,8 +1,8 @@
 (() => {
   var http = require('http');
-  var jenkins = require('jenkins');
+  var jenkinsapi = require('jenkins-api');
   var async = require('async');
-  var PROXY_PORT = require('./Constants.js').PROXY_PORT;
+  var PROXY_PORT = require('./app/Constants.js').PROXY_PORT;
 
   var patchProtocol = (url) => {
     var protocolStr = 'http://';
@@ -25,8 +25,6 @@
   };
 
   var parseJobs = (query) => {
-    // console.log('parsing query', query);
-
     if(query.startsWith('/q=')) {
       query = query.substring(3, query.length);
     }
@@ -52,7 +50,9 @@
   var getJob = (job, cb) => {
     // console.log('getting job', job);
     
-    jenkins(job.url).job.get(job.name, (err, data) => {
+    var jenkins = jenkinsapi.init(job.url);
+
+    jenkins.last_build_info(job.name, (err, data) => {
       cb(err, data);
     });
   };
