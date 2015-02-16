@@ -2,6 +2,7 @@
   var http = require('http');
   var jenkins = require('jenkins');
   var async = require('async');
+  var PROXY_PORT = require('./Constants.js').PROXY_PORT;
 
   var patchProtocol = (url) => {
     var protocolStr = 'http://';
@@ -69,7 +70,7 @@
       sendResponseJSON(res, results);
     });
 
-  }).listen(9090);
-  console.log('Server listening on http://localhost:9090/');
+  }).listen(PROXY_PORT);
+  console.log('Server listening on http://localhost:'+PROXY_PORT+'/');
 
 })();

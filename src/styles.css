@@ -5,6 +5,11 @@
   margin: 1rem;
 }
 
+.light-stat {
+  opacity: .3;
+  font-size: 1.2rem;
+}
+
 .link {
   color:white;
   display: block;
@@ -13,9 +18,8 @@
   text-decoration: none;
 }
 
-.link:hover {
+.light-name:hover {
   text-decoration: underline;
-  color: blue;
 }
 
 .blue {
