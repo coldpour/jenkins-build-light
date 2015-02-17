@@ -48,12 +48,15 @@
   };
 
   var getJob = (job, cb) => {
-    // console.log('getting job', job);
-    
     var jenkins = jenkinsapi.init(job.url);
+    var jobInfo = {};
 
-    jenkins.last_build_info(job.name, (err, data) => {
-      cb(err, data);
+    jenkins.job_info(job.name, (err, data) => {
+      jobInfo.job = data;
+      jenkins.last_build_info(job.name, (err, data) => {
+        jobInfo.lastBuild = data;
+        cb(err, jobInfo);
+      });
     });
   };
 

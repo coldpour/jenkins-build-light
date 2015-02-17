@@ -21,11 +21,11 @@
   text-decoration: none;
 }
 
-.duration {
+.build-duration {
   float: right;
 }
 
-.number {
+.build-number {
   float: left;
 }
 
@@ -37,16 +37,16 @@
   background-color: darkgreen;
 }
 
-.blue-anime {
-  background-color: blue;
+.blue_anime {
+  background-color: green;
 }
 
 .red {
   background-color: darkred;
 }
 
-.red-anime {
-  background-color: purple;
+.red_anime {
+  background-color: red;
 }
 
 .grey {

@@ -6,6 +6,7 @@ module.exports = {
 
   BUILDS: [
     'churro.ci.f4tech.com/job/churro',
+    'http://urro.ci.f4tech.com/job/ux-bootstrap/',
     'almci/job/alm-jobs/job/alm',
     'almci/job/app-catalog-jobs/job/app-catalog',
     'almci/job/appsdk-jobs/job/appsdk',

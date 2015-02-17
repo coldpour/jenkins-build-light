@@ -1,46 +1,55 @@
 var React = require('react');
 
 var BuildLight = React.createClass({
-  propTypes: {
-    fullDisplayName: React.PropTypes.string,
-    url: React.PropTypes.string,
-    result: React.PropTypes.string,
-    number: React.PropTypes.number,
-    duration: React.PropTypes.number
+  render() {
+    var props = this.props;
+    var { color, url } = props.job;
+    var cls = 'light link ' + color || 'grey';
+    return (
+        <a className={ cls } href={ url }>
+        <BuildName { ...props } />
+        <BuildNumber { ...props } />
+        <BuildDuration { ...props } />
+        </a>
+    );
+  }
+});
+
+var BuildName = React.createClass({
+  render() {
+    var { fullDisplayName } = this.props.lastBuild;
+    var name = fullDisplayName.replace(/#\d*/, '');
+    return <div className='build-name'>{ name }</div>;
+  }
+});
+
+var BuildNumber = React.createClass({
+  render() {
+    var { number } = this.props.lastBuild;
+    var str = number ? `#${number}` : '';
+    return <div className='light-stat build-number'>{ str }</div>;
+  }
+});
+
+var BuildDuration = React.createClass({
+  format(ms) {
+    console.log(this.props.job.name, ms);
+    var x = ms / 1000;
+    var seconds = Math.floor(x % 60);
+    x /= 60;
+    var minutes = Math.floor(x % 60);
+    x /= 60;
+    var hours = Math.floor(x % 24);
+    var str = hours > 0 ? `${hours}h` : '';
+    str += minutes > 0 ? ` ${minutes}m` : '';
+    str += seconds > 0 ? ` ${seconds}s` : '';
+    return str;
   },
 
   render() {
-    var props = this.props;
-    var name = this._extractName(props.fullDisplayName);
-    var duration = this._createDurationString();
-    var cls = "light link " + this._parseColor(props.result);
-    return (
-        <a className={ cls } href={props.url}>
-        <div className='light-name'>{ name }</div>
-        <div className='light-stat number'>#{ props.number }</div>
-        <div className='light-stat duration'>{ duration }ms</div>
-        </a>
-    );
-  },
-
-  _extractName(str) {
-    return str.replace(/#\d*/, '');
-  },
-
-  _parseColor(result) {
-    switch (result) {
-      case 'SUCCESS':
-        return 'blue';
-      case 'FAILURE':
-        return 'red';
-      default:
-        return 'grey';
-    }
-  },
-
-  _createDurationString() {
-    var props = this.props;
-    return props.building ? props.estimatedDuration : props.duration;
+    var { building, estimatedDuration, duration } = this.props.lastBuild;
+    var time = building ? estimatedDuration : duration;    
+    return <div className='light-stat build-duration'>{ this.format(time) }</div>;
   }
 });
 

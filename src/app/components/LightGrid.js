@@ -9,7 +9,7 @@ var LightGrid = React.createClass({
 
   render() {
     var builds = this.props.builds.map((build) => {
-      return <BuildLight key={ build.id } { ...build }/>;
+      return <BuildLight key={ build.lastBuild.id } { ...build }/>;
     });
 
     return (
