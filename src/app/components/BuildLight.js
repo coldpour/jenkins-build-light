@@ -46,9 +46,16 @@ var BuildDuration = React.createClass({
   },
 
   render() {
-    var { building, estimatedDuration, duration } = this.props.lastBuild;
-    var time = building ? estimatedDuration : duration;    
-    return <div className='light-stat build-duration'>{ this.format(time) }</div>;
+    var { building, estimatedDuration, duration, timestamp } = this.props.lastBuild;
+    var timeStr = this.format(duration);
+
+    if(building) {
+      var fElapsed = this.format(Date.now() - timestamp);
+      var fEstimate = this.format(estimatedDuration);
+      timeStr = `${fElapsed} | ${fEstimate}`;
+    }
+
+    return <div className='light-stat build-duration'>{ timeStr }</div>;
   }
 });
 
