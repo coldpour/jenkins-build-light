@@ -70,7 +70,7 @@
 }
 
 @-webkit-keyframes animate_green {
-  from {background-color: green;}
+  from {background-color: limegreen;}
   to {background: darkgreen;}
 }
 
@@ -81,7 +81,7 @@
 }
 
 @keyframes animate_green {
-  from {background-color: green;}
+  from {background-color: limegreen;}
   to {background-color: darkgreen;}
 }
 
