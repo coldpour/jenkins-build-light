@@ -33,7 +33,6 @@ var BuildNumber = React.createClass({
 
 var BuildDuration = React.createClass({
   format(ms) {
-    console.log(this.props.job.name, ms);
     var x = ms / 1000;
     var seconds = Math.floor(x % 60);
     x /= 60;

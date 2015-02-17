@@ -38,7 +38,14 @@
 }
 
 .blue_anime {
-  background-color: green;
+  /* Chrome, Safari, Opera */
+  -webkit-animation: animate_green 1s; 
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  /* Standard syntax */
+  animation: animate_green 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 .red {
@@ -46,7 +53,36 @@
 }
 
 .red_anime {
-  background-color: red;
+  /* Chrome, Safari, Opera */
+  -webkit-animation: animate_red 1s; 
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  /* Standard syntax */
+  animation: animate_red 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes animate_red {
+  from {background-color: red;}
+  to {background: darkred;}
+}
+
+@-webkit-keyframes animate_green {
+  from {background-color: green;}
+  to {background: darkgreen;}
+}
+
+/* Standard syntax */
+@keyframes animate_red {
+  from {background-color: red;}
+  to {background-color: darkred;}
+}
+
+@keyframes animate_green {
+  from {background-color: green;}
+  to {background-color: darkgreen;}
 }
 
 .grey {
