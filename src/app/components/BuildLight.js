@@ -10,6 +10,7 @@ var BuildLight = React.createClass({
         <BuildName { ...props } />
         <BuildNumber { ...props } />
         <BuildDuration { ...props } />
+        <BuildCulprits { ...props } />
         </a>
     );
   }
@@ -56,6 +57,22 @@ var BuildDuration = React.createClass({
     }
 
     return <div className='light-stat build-duration'>{ timeStr }</div>;
+  }
+});
+
+var BuildCulprits = React.createClass({
+
+  render() {
+    var { culprits } = this.props.lastBuild;
+    var { color } = this.props.job;
+    var list = culprits.reduce((prev, curr, i) => {
+      var seperator = i > 0 ? ', ' : '';
+      return prev + seperator + curr.fullName;
+    }, 'Potential Culprits: ');
+    var failed = color === 'red' || color === 'red-anime' ;
+    var culpritsStr = failed ? list : '';
+    var cls = 'light-stat build-culprits' + (!failed ? ' hidden' : '');
+    return <div className={ cls }>{ culpritsStr }</div>;
   }
 });
 

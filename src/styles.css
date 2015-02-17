@@ -19,6 +19,7 @@
   font-size: 1.5rem;
   text-align: center;
   text-decoration: none;
+  font-weight: bold;
 }
 
 .build-duration {
@@ -27,6 +28,13 @@
 
 .build-number {
   float: left;
+}
+
+.build-culprits {
+  font-size: .7rem;
+  opacity: 1;
+  bottom: 0rem;
+  font-weight: normal;
 }
 
 .light-name:hover {
@@ -39,7 +47,7 @@
 
 .blue_anime {
   /* Chrome, Safari, Opera */
-  -webkit-animation: animate_green 1s; 
+  -webkit-animation: animate_green 1s;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-direction: alternate;
   /* Standard syntax */
@@ -54,7 +62,7 @@
 
 .red_anime {
   /* Chrome, Safari, Opera */
-  -webkit-animation: animate_red 1s; 
+  -webkit-animation: animate_red 1s;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-direction: alternate;
   /* Standard syntax */
@@ -93,4 +101,5 @@ html {
   background-color: #2C2C2C;
   color: white;
   text-align:center;
+  font-family: 'Open Sans', Verdana, Helvetica;
 }

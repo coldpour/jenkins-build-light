@@ -5,6 +5,7 @@ module.exports = {
   POLL_FREQUENCY: 5000,
 
   BUILDS: [
+    'http://almci/job/on-demand/job/alm-on-demand-2',
     'churro.ci.f4tech.com/job/churro',
     'http://urro.ci.f4tech.com/job/ux-bootstrap/',
     'almci/job/alm-jobs/job/alm',
