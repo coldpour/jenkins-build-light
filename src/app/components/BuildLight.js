@@ -18,8 +18,8 @@ var BuildLight = React.createClass({
 
 var BuildName = React.createClass({
   render() {
-    var { fullDisplayName } = this.props.lastBuild;
-    var name = fullDisplayName.replace(/#\d*/, '');
+    var { displayName } = this.props.job;
+    var name = displayName.replace(/#\d*/, '');
     return <div className='build-name'>{ name }</div>;
   }
 });
