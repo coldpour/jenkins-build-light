@@ -5,14 +5,15 @@ module.exports = {
   POLL_FREQUENCY: 5000,
 
   BUILDS: [
-    'http://almci/job/on-demand/job/alm-on-demand-2',
+    'http://urro.ci.f4tech.com/job/burro-build/',
     'churro.ci.f4tech.com/job/churro',
+    'http://urro.ci.f4tech.com/view/%20Build%20Light%20View/job/churro-errors/',
     'http://urro.ci.f4tech.com/job/ux-bootstrap/',
     'almci/job/alm-jobs/job/alm',
     'almci/job/app-catalog-jobs/job/app-catalog',
     'almci/job/appsdk-jobs/job/appsdk',
-    'almci/job/alm-jobs/job/alm-backward-compatibility-of-migrations',
-    'almci/job/bridge/job/appsdk-alm-bridge'
+    'almci/job/bridge/job/appsdk-alm-bridge',
+    'almci/job/alm-jobs/job/alm-backward-compatibility-of-migrations'
   ],
 
   ActionTypes: keyMirror({

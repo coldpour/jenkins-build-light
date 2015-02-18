@@ -1,9 +1,15 @@
 .light {
   border-radius: .8rem;
+  color:white;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
   list-style: none;
-  margin: 1rem;
+  margin: .5rem;
   min-height: 4rem;
   padding: 1rem;
+  text-align: center;
+  text-decoration: none;
 }
 
 .light-stat {
@@ -11,15 +17,6 @@
   font-size: 1.2rem;
   opacity: .3;
   position: relative;
-}
-
-.link {
-  color:white;
-  display: block;
-  font-size: 1.5rem;
-  text-align: center;
-  text-decoration: none;
-  font-weight: bold;
 }
 
 .build-duration {
@@ -31,10 +28,10 @@
 }
 
 .build-culprits {
-  font-size: .7rem;
-  opacity: 1;
   bottom: 0rem;
+  font-size: .7rem;
   font-weight: normal;
+  opacity: 1;
 }
 
 .light-name:hover {
@@ -46,14 +43,14 @@
 }
 
 .blue_anime {
-  /* Chrome, Safari, Opera */
-  -webkit-animation: animate_green 1s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-direction: alternate;
   /* Standard syntax */
   animation: animate_green 1s;
-  animation-iteration-count: infinite;
   animation-direction: alternate;
+  animation-iteration-count: infinite;
+  /* Chrome, Safari, Opera */
+  -webkit-animation: animate_green 1s;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-iteration-count: infinite;
 }
 
 .red {
@@ -61,14 +58,14 @@
 }
 
 .red_anime {
-  /* Chrome, Safari, Opera */
-  -webkit-animation: animate_red 1s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-direction: alternate;
   /* Standard syntax */
   animation: animate_red 1s;
-  animation-iteration-count: infinite;
   animation-direction: alternate;
+  animation-iteration-count: infinite;
+  /* Chrome, Safari, Opera */
+  -webkit-animation: animate_red 1s;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-iteration-count: infinite;
 }
 
 .aborted {
@@ -76,14 +73,14 @@
 }
 
 .aborted_anime {
-  /* Chrome, Safari, Opera */
-  -webkit-animation: animate_grey 1s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-direction: alternate;
   /* Standard syntax */
   animation: animate_grey 1s;
-  animation-iteration-count: infinite;
   animation-direction: alternate;
+  animation-iteration-count: infinite;
+  /* Chrome, Safari, Opera */
+  -webkit-animation: animate_grey 1s;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-iteration-count: infinite;
 }
 
 /* Chrome, Safari, Opera */
@@ -125,6 +122,21 @@
 html {
   background-color: #2C2C2C;
   color: white;
-  text-align:center;
   font-family: 'Open Sans', Verdana, Helvetica;
+  text-align:center;
+}
+
+.twoColumn {
+  display: inline-block;
+  width: 50%;
+}
+
+.threeColumn {
+  display: inline-block;
+  width: 33.33333333%;
+}
+
+.fourColumn {
+  display: inline-block;
+  width: 25%;
 }

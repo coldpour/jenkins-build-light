@@ -4,7 +4,7 @@ var BuildLight = React.createClass({
   render() {
     var props = this.props;
     var { color, url } = props.job;
-    var cls = 'light link ' + color || 'grey';
+    var cls = 'light ' + color || 'grey';
     return (
         <a className={ cls } href={ url }>
         <BuildName { ...props } />
