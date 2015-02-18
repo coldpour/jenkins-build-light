@@ -69,9 +69,9 @@ var BuildCulprits = React.createClass({
       var seperator = i > 0 ? ', ' : '';
       return prev + seperator + curr.fullName;
     }, 'Potential Culprits: ');
-    var failed = color === 'red' || color === 'red-anime' ;
+    var failed = color === 'red' || color === 'red_anime' ;
     var culpritsStr = failed ? list : '';
-    var cls = 'light-stat build-culprits' + (!failed ? ' hidden' : '');
+    var cls = 'build-culprits' + (!failed ? ' hidden' : '');
     return <div className={ cls }>{ culpritsStr }</div>;
   }
 });

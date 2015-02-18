@@ -10,14 +10,16 @@ var LightGrid = React.createClass({
 
   render() {
     var cls = this._getLightSize(BUILDS.length);
+    var odd = BUILDS.length%2===1;
 
-    var builds = this.props.builds.map((build) => {
-      return (
-        <div className={ cls }>
-          <BuildLight key={ build.lastBuild.id } { ...build }/>
+    var builds = this.props.builds.reduce((prev, curr, i, arr) => {
+      var last = i === (arr.length - 1);
+      return prev.concat([
+        <div className={ (odd && last) ? 'oneColumn' : cls }>
+          <BuildLight key={ curr.lastBuild.id } { ...curr }/>
         </div>
-      );
-    });
+      ]);
+    }, []);
 
     return (
         <div>
