@@ -1,7 +1,7 @@
 var keyMirror = require('react/lib/keyMirror');
 
 module.exports = {
-  PROXY_PORT: 9090,
+  PROXY: 'http://localhost:9090',
   POLL_FREQUENCY: 5000,
 
   BUILDS: [
