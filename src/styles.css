@@ -7,7 +7,7 @@
 }
 
 .light-stat {
-  bottom: -1.5rem;
+  bottom: -1rem;
   font-size: 1.2rem;
   opacity: .3;
   position: relative;
@@ -71,6 +71,21 @@
   animation-direction: alternate;
 }
 
+.aborted {
+  background-color: grey;
+}
+
+.aborted_anime {
+  /* Chrome, Safari, Opera */
+  -webkit-animation: animate_grey 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  /* Standard syntax */
+  animation: animate_grey 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
 /* Chrome, Safari, Opera */
 @-webkit-keyframes animate_red {
   from {background-color: red;}
@@ -82,6 +97,11 @@
   to {background: darkgreen;}
 }
 
+@-webkit-keyframes animate_grey {
+  from {background-color: lightgrey;}
+  to {background: grey;}
+}
+
 /* Standard syntax */
 @keyframes animate_red {
   from {background-color: red;}
@@ -91,6 +111,11 @@
 @keyframes animate_green {
   from {background-color: limegreen;}
   to {background-color: darkgreen;}
+}
+
+@keyframes animate_grey {
+  from {background-color: lightgrey;}
+  to {background-color: grey;}
 }
 
 .grey {
