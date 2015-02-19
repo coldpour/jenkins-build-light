@@ -1,12 +1,10 @@
-Jenkins Build Light
-===================
+# Jenkins Build Light
 
 Webapp that displays the status of several jenkins jobs even across multiple servers
 
 ![JenkinsBuildLight](JenkinsBuildLight.png)
 
-To Hack
--------
+## To Hack
 
 ```bash
 git clone https://github.com/coldpour/jenkins-build-light.git
@@ -22,13 +20,14 @@ This runs the webpack dev server, any changes you make to javascript or css
 files in `src` will cause the browser to reload live. The proxy server code
 will not live reload however, so any changes you make there will need to bounce the proxy.
 
-Configuration
--------------
+The app will also be hosted at http://localhost:8080, but it won't receive live updates.
+
+## Configuration
 
 For the moment, all configuration lives in `src/app/Constants.js`.
 
-## PROXY
+### PROXY
 To set up a server that other people can connect to, you'll need to change the `PROXY` to either an IP or a DNS hostname. Leaving the `PROXY=http://localhost` will pretty much only work for local development.
 
-## BUILDS
+### BUILDS
 Configuring the lights that display on your monitor is a matter of changing the urls in the `BUILDS` array. Each entry in that array will be sent to the proxy server which will attempt to fetch data for that url.
