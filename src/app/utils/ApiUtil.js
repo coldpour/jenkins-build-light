@@ -1,5 +1,5 @@
 var xhr = require('../lib/xhr');
-var { BUILDS, PROXY } = require('../Constants');
+var { BUILDS, PROXY, PROXY_PORT } = require('../Constants');
 var ServerActionCreators = require('../actions/ServerActionCreators');
 
 var ApiUtils = {
@@ -9,7 +9,7 @@ var ApiUtils = {
         var seperator = i>0?'&':'';
         return prev + seperator + curr;
       }, 
-      PROXY+'/q=');
+      `${PROXY}:${PROXY_PORT}/q=`);
 
     xhr.getJSON(url, (err, res) => {
       ServerActionCreators.loadedBuilds(res);

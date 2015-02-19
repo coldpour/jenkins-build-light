@@ -2,7 +2,9 @@
   var http = require('http');
   var jenkinsapi = require('jenkins-api');
   var async = require('async');
-  var PROXY_PORT = require('./app/Constants.js').PROXY_PORT;
+  var Constants = require('./app/Constants');
+  var PROXY = Constants.PROXY;
+  var PROXY_PORT = Constants.PROXY_PORT;
 
   var patchProtocol = (url) => {
     var protocolStr = 'http://';
@@ -74,6 +76,6 @@
     });
 
   }).listen(PROXY_PORT);
-  console.log('Server listening on http://localhost:'+PROXY_PORT+'/');
+  console.log('Server listening on '+PROXY+':'+PROXY_PORT+'/');
 
 })();

@@ -1,14 +1,16 @@
 var keyMirror = require('react/lib/keyMirror');
 
 module.exports = {
-  PROXY: 'http://localhost:9090',
+  PROXY_PORT: 9090,
+  PROXY: 'http://mholm-mbp.f4tech.com',
   POLL_FREQUENCY: 5000,
 
   BUILDS: [
-    'http://urro.ci.f4tech.com/job/burro-build/',
-    'churro.ci.f4tech.com/job/churro',
-    'http://urro.ci.f4tech.com/view/%20Build%20Light%20View/job/churro-errors/',
-    'http://urro.ci.f4tech.com/job/ux-bootstrap/',
+    'urro.ci.f4tech.com/job/sombrero',
+    'urro.ci.f4tech.com/job/burro-build',
+    'urro.ci.f4tech.com/job/churro',
+    'urro.ci.f4tech.com/job/churro-errors',
+    'urro.ci.f4tech.com/job/ux-bootstrap',
     'almci/job/alm-jobs/job/alm',
     'almci/job/app-catalog-jobs/job/app-catalog',
     'almci/job/appsdk-jobs/job/appsdk',

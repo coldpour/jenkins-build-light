@@ -25,4 +25,10 @@ will not live reload however, so any changes you make there will need to bounce 
 Configuration
 -------------
 
-For the moment, the list of jobs to pull from is in `src/app/Constants.js` as an array called `BUILDS`. Add job URLs to this list to add lights to your view.
+For the moment, all configuration lives in `src/app/Constants.js`.
+
+## PROXY
+To set up a server that other people can connect to, you'll need to change the `PROXY` to either an IP or a DNS hostname. Leaving the `PROXY=http://localhost` will pretty much only work for local development.
+
+## BUILDS
+Configuring the lights that display on your monitor is a matter of changing the urls in the `BUILDS` array. Each entry in that array will be sent to the proxy server which will attempt to fetch data for that url.

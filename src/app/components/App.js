@@ -24,8 +24,8 @@ var App = React.createClass({
 
   render () {
     return (
-        <div>
-        <h1>Jenkins Build Light View</h1>
+        <div className='app'>
+        <h1 className='header'>Jenkins Build Light View</h1>
         <LightGrid { ...this.state }/>
         </div>
     );

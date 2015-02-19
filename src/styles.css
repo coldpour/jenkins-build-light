@@ -1,13 +1,16 @@
 .light {
+  align-content: center;
+  align-items: center;
   border-radius: .8rem;
-  color:white;
-  display: block;
+  color: white;
+  display: flex;
   font-size: 1.5rem;
   font-weight: bold;
+  justify-content: space-around;
   list-style: none;
-  margin: .15rem;
-  min-height: 4rem;
-  padding: 1rem;
+  margin: .2rem;
+  overflow: hidden;
+  position: relative;
   text-align: center;
   text-decoration: none;
 }
@@ -20,24 +23,29 @@
 }
 
 .build-duration {
-  float: right;
+  bottom: 0;
+  position: absolute;
+  right: .3rem;
 }
 
 .build-number {
-  float: left;
+  bottom: 0;
+  left: .3rem;
+  position: absolute;
 }
 
 .build-culprits {
-  bottom: 1.4rem;
-  clear: both;
   font-size: .7rem;
   font-weight: normal;
-  max-height: .8rem;
-  overflow-y: hidden;
-  position: relative;
+  overflow: hidden;
 }
 
-.light-name:hover {
+.build-name {
+  font-size: 2rem;
+  margin: 0 auto;
+}
+
+.build-name:hover {
   text-decoration: underline;
 }
 
@@ -126,25 +134,62 @@ html {
   background-color: #2C2C2C;
   color: white;
   font-family: 'Open Sans', Verdana, Helvetica;
+  height: 100%;
+  line-height: 1.4;
   text-align:center;
 }
 
-.oneColumn {
-  display: inline-block;
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+  position: absolute;
   width: 100%;
 }
 
+.header {
+  height: 4%;
+  min-height: 2rem;
+}
+
+.light-grid {
+  /* height: 100%; */
+  display: flex;
+  flex-basis: 0%;
+  flex-direction: row;
+  flex-grow: 88;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  list-style-type: none;
+}
+
+.oneColumn {
+  -webkit-flex: 1 98%;
+  flex: 1 98%;
+}
+
 .twoColumn {
-  display: inline-block;
-  width: 50%;
+  -webkit-flex: 1 48%;
+  flex: 1 48%;
 }
 
 .threeColumn {
-  display: inline-block;
-  width: 33.33333333%;
+  -webkit-flex: 1 30%;
+  flex: 1 30%;
 }
 
 .fourColumn {
-  display: inline-block;
-  width: 25%;
+  -webkit-flex: 1 23%;
+  flex: 1 23%;
+}
+
+.fiveColumn {
+  -webkit-flex: 1 18%;
+  flex: 1 18%;  
 }

@@ -3,14 +3,13 @@ var React = require('react');
 var BuildLight = React.createClass({
   render() {
     var props = this.props;
-    var { color, url } = props.job;
+    var { url, color } = props.job;
     var cls = 'light ' + color || 'grey';
     return (
-        <a className={ cls } href={ url }>
+        <a className={ `${this.props.className} ${cls}` } href={ url }>
         <BuildName { ...props } />
         <BuildNumber { ...props } />
         <BuildDuration { ...props } />
-        <BuildCulprits { ...props } />
         </a>
     );
   }
@@ -18,9 +17,15 @@ var BuildLight = React.createClass({
 
 var BuildName = React.createClass({
   render() {
-    var { displayName } = this.props.job;
+    var props = this.props;
+    var { displayName } = props.job;
     var name = displayName.replace(/#\d*/, '');
-    return <div className='build-name'>{ name }</div>;
+    return (
+        <div className='build-name'>
+          { name }
+          <BuildCulprits { ...props } />
+        </div>
+    );
   }
 });
 
