@@ -34,6 +34,10 @@
   position: absolute;
 }
 
+.build-number:hover {
+  text-decoration: underline;
+}
+
 .build-culprits {
   font-size: .7rem;
   font-weight: normal;

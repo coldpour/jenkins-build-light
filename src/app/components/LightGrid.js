@@ -8,9 +8,13 @@ var LightGrid = React.createClass({
   },
 
   render() {
-    var cls = this._getLightSize(this.props.builds.length);
+    var props = this.props;
+    var builds = props.builds;
+    var cls = this._getLightSize(builds.length);
+    console.log(builds.length, 'builds');
+    console.log('LightGrid > cls', cls);
 
-    var builds = this.props.builds.reduce((prev, curr, i, arr) => {
+    var buildLights = builds.reduce((prev, curr, i, arr) => {
       return prev.concat([
           <BuildLight key={ curr.displayName } className={ cls } { ...curr }/>
       ]);
@@ -18,7 +22,7 @@ var LightGrid = React.createClass({
 
     return (
         <div className={ `light-grid` }>
-        { this.props.loaded ? builds : 'Loading...' }
+        { props.loaded ? buildLights : 'Loading...' }
         </div>
     );
   },

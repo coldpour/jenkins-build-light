@@ -3,14 +3,27 @@ var React = require('react');
 var BuildLight = React.createClass({
   render() {
     var props = this.props;
-    var { url, color } = props.job;
+    var { color } = props.job;
+    var { url } = props.lastBuild;
     var cls = 'light ' + color || 'grey';
     return (
         <a className={ `${this.props.className} ${cls}` } href={ url }>
-        <BuildName { ...props } />
+        <BuildText { ...props } />
         <BuildNumber { ...props } />
         <BuildDuration { ...props } />
         </a>
+    );
+  }
+});
+
+var BuildText = React.createClass({
+  render() {
+    var props = this.props;
+    return (
+        <div className='build-text'>
+        <BuildName { ...props } />
+        <BuildCulprits { ...props } />
+        </div>
     );
   }
 });
@@ -21,11 +34,23 @@ var BuildName = React.createClass({
     var { displayName } = props.job;
     var name = displayName.replace(/#\d*/, '');
     return (
-        <div className='build-name'>
-          { name }
-          <BuildCulprits { ...props } />
-        </div>
+        <div className='build-name'>{ name }</div>
     );
+  }
+});
+
+var BuildCulprits = React.createClass({
+  render() {
+    var { culprits } = this.props.lastBuild;
+    var { color } = this.props.job;
+    var list = culprits.reduce((prev, curr, i) => {
+      var seperator = i > 0 ? ', ' : '';
+      return prev + seperator + curr.fullName;
+    }, 'Potential Culprits: ');
+    var failed = color === 'red' || color === 'red_anime' ;
+    var culpritsStr = failed ? list : '';
+    var cls = 'build-culprits' + (!failed ? ' hidden' : '');
+    return <div className={ cls }>{ culpritsStr }</div>;
   }
 });
 
@@ -62,22 +87,6 @@ var BuildDuration = React.createClass({
     }
 
     return <div className='light-stat build-duration'>{ timeStr }</div>;
-  }
-});
-
-var BuildCulprits = React.createClass({
-
-  render() {
-    var { culprits } = this.props.lastBuild;
-    var { color } = this.props.job;
-    var list = culprits.reduce((prev, curr, i) => {
-      var seperator = i > 0 ? ', ' : '';
-      return prev + seperator + curr.fullName;
-    }, 'Potential Culprits: ');
-    var failed = color === 'red' || color === 'red_anime' ;
-    var culpritsStr = failed ? list : '';
-    var cls = 'build-culprits' + (!failed ? ' hidden' : '');
-    return <div className={ cls }>{ culpritsStr }</div>;
   }
 });
 
