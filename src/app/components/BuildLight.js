@@ -1,11 +1,35 @@
 var React = require('react');
+var BuildsStore = require('../stores/BuildsStore.js');
+var ViewActionCreators = require('../actions/ViewActionCreators.js');
+var { POLL_FREQUENCY } = require('../Constants.js');
 
 var BuildLight = React.createClass({
+  getInitialState () {
+    return {
+      loaded: false
+    };
+  },
+
+  componentDidMount () {
+    BuildsStore.addChangeListener(this.handleStoreChange);
+    var loadThisBuild = ViewActionCreators.loadBuild.bind(this, this.props.url);
+    loadThisBuild();
+    window.setInterval(loadThisBuild, POLL_FREQUENCY);
+  },
+
+  componentWillUnmount () {
+    BuildsStore.removeChangeListener(this.handleStoreChange);
+  },
+
+  handleStoreChange () {
+    this.setState(BuildsStore.getState().builds);
+  },
+
   render() {
     var props = this.props;
-    var { color } = props.job;
-    var { url } = props.lastBuild;
-    var cls = 'light ' + color || 'grey';
+    var color = (props.job && props.job.color) || 'grey';
+    var url = props.url;
+    var cls = 'light ' + color;
     return (
         <a className={ `${this.props.className} ${cls}` } href={ url }>
         <BuildText { ...props } />
@@ -31,7 +55,7 @@ var BuildText = React.createClass({
 var BuildName = React.createClass({
   render() {
     var props = this.props;
-    var { displayName } = props.job;
+    var displayName = (props.job && props.job.displayName) || props.url || '';
     var name = displayName.replace(/#\d*/, '');
     return (
         <div className='build-name'>{ name }</div>
@@ -41,8 +65,9 @@ var BuildName = React.createClass({
 
 var BuildCulprits = React.createClass({
   render() {
-    var { culprits } = this.props.lastBuild;
-    var { color } = this.props.job;
+    var props = this.props;
+    var culprits = (props.lastBuild && props.lastBuild.culprits) || [];
+    var color = (props.job && props.job.color) || 'grey';
     var list = culprits.reduce((prev, curr, i) => {
       var seperator = i > 0 ? ', ' : '';
       return prev + seperator + curr.fullName;
@@ -56,7 +81,8 @@ var BuildCulprits = React.createClass({
 
 var BuildNumber = React.createClass({
   render() {
-    var { number } = this.props.lastBuild;
+    var props = this.props;
+    var number = (props.lastBuild && props.lastBuild.number) || '';
     var str = number ? `#${number}` : '';
     return <div className='light-stat build-number'>{ str }</div>;
   }
@@ -77,7 +103,7 @@ var BuildDuration = React.createClass({
   },
 
   render() {
-    var { building, estimatedDuration, duration, timestamp } = this.props.lastBuild;
+    var { building, estimatedDuration, duration, timestamp } = this.props.lastBuild || {};
     var timeStr = this.format(duration);
 
     if(building) {

@@ -1,3 +1,59 @@
+.add-btn {
+  background-color: grey;
+  border-radius: .3rem;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  height: 2.5rem;
+  margin-right: 1rem;
+  width: 2.5rem;
+}
+
+.add-build-form {
+  display: inline-block;
+  float: right;
+}
+
+@-webkit-keyframes add-text-expand {
+  from {width: 0; display:none;}
+  to {width: 10rem; display:inline-block;}
+}
+
+/* Standard syntax */
+@keyframes add-text-expand {
+  from {width: 0; display: none;}
+  to {width: 10rem; display:inline-block;}
+}
+
+.expanded-add-text {
+  border: none;
+  font-size: 1.2rem;
+  height: 2.2rem;
+  margin-right: .5rem;
+  padding-left: .6rem;
+  padding-right: .6rem;
+  width: 10rem;
+  /* Standard syntax */
+  animation: add-text-expand .5s;
+  /* Chrome, Safari, Opera */
+  -webkit-animation: add-text-expand .5s;
+}
+
+.collapsed-add-text {
+  margin-right: .5rem;
+  display: none;
+  height: 2.2rem;
+  font-size: 1.2rem;
+  border: none;
+  /* Standard syntax */
+  animation: add-text-expand .5s;
+  animation-direction: reverse;
+  /* Chrome, Safari, Opera */
+  -webkit-animation: add-text-expand .5s;
+  -webkit-animation-direction: reverse;
+}
+
 .light {
   align-content: center;
   align-items: center;
@@ -155,11 +211,6 @@ body {
   height: 100%;
   position: absolute;
   width: 100%;
-}
-
-.header {
-  height: 4%;
-  min-height: 2rem;
 }
 
 .light-grid {

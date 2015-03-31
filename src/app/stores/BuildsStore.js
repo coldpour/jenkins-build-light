@@ -7,13 +7,38 @@ var events = new EventEmitter();
 var CHANGE_EVENT = 'CHANGE';
 
 var state = {
-  builds: [],
-  loaded: false
+  builds: {},
+  query: false
 };
 
 var setState = (newState) => {
   assign(state, newState);
   events.emit(CHANGE_EVENT);
+};
+
+var update = (updates) => {
+  var key = updates.url;
+  state.builds[key] = assign({}, state.builds[key], updates);
+  events.emit(CHANGE_EVENT);
+};
+
+var createBuildsIfNeeded = (builds) => {
+  var newBuilds = builds.reduce((prev, curr) => {
+    if(state.builds.hasOwnProperty(curr)) {
+      prev[curr] = state.builds[curr];
+    } else {
+      prev[curr] = {
+        job: {},
+        lastBuild: {},
+        url: curr
+      };
+    }
+    return prev;
+  }, {});
+  setState({
+    builds: newBuilds,
+    query: true
+  });
 };
 
 var BuildsStore = {
@@ -32,14 +57,17 @@ var BuildsStore = {
 
 BuildsStore.dispatchToken = AppDispatcher.register((payload) => {
   var { action } = payload;
-  console.log(action.type);
-  if (action.type === ActionTypes.BUILDS_LOADED) {
+  console.log('BuildsStore', action.type);
+  if (action.type === ActionTypes.BUILD_LOADED) {
+    update(action.build);
+  } else if (action.type === ActionTypes.BUILDS_GRABBED) {
+    createBuildsIfNeeded(action.builds);
+  } else if (action.type === ActionTypes.NO_QUERY) {
     setState({
-      loaded: true,
-      builds: action.builds
+      builds: {},
+      query: false
     });
   }
 });
 
 module.exports = BuildsStore;
-

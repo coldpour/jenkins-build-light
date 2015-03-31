@@ -1,34 +1,48 @@
 var React = require('react');
+var BuildsStore = require('../stores/BuildsStore.js');
+var ViewActionCreators = require('../actions/ViewActionCreators.js');
 var BuildLight = require('./BuildLight');
 
 var LightGrid = React.createClass({
-  propTypes: {
-    loaded: React.PropTypes.bool,
-    builds: React.PropTypes.arrayOf(React.PropTypes.object)
+  getInitialState () {
+    return BuildsStore.getState();
+  },
+
+  componentDidMount () {
+    BuildsStore.addChangeListener(this.handleStoreChange);
+    ViewActionCreators.getBuildsFromUrl();
+  },
+
+  componentWillUnmount () {
+    BuildsStore.removeChangeListener(this.handleStoreChange);
+  },
+
+  handleStoreChange () {
+    this.setState(BuildsStore.getState());
   },
 
   render() {
-    var props = this.props;
-    var builds = props.builds;
-    var cls = this._getLightSize(builds.length);
-    console.log(builds.length, 'builds');
-    console.log('LightGrid > cls', cls);
+    var state = this.state;
+    var builds = state.builds;
+    var keys = Object.keys(builds);
+    var cls = this._getLightSize(keys.length);
+    var buildLights = [];
 
-    var buildLights = builds.reduce((prev, curr, i, arr) => {
-      return prev.concat([
-          <BuildLight key={ curr.displayName } className={ cls } { ...curr }/>
-      ]);
-    }, []);
+    if(state.query) {
+      buildLights = keys.map((id) => {
+        return <BuildLight key={ id } className={ cls } { ...builds[id] } />;
+      });
+    }
 
     return (
         <div className={ `light-grid` }>
-        { props.loaded ? buildLights : 'Loading...' }
-        </div>
-    );
+        { buildLights }
+      </div>
+    );      
   },
 
   _getLightSize(num) {
-    if(num < 9) {
+    if(!num || num < 9) {
       return 'twoColumn';
     } else if (num < 16) {
       return 'threeColumn';

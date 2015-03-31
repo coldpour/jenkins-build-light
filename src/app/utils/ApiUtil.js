@@ -1,19 +1,16 @@
 var xhr = require('../lib/xhr');
-var { BUILDS, PROXY, PROXY_PORT } = require('../Constants');
+var { PROXY, PROXY_PORT } = require('../Constants');
 var ServerActionCreators = require('../actions/ServerActionCreators');
 
 var ApiUtils = {
-  loadBuilds () {
-    var url = BUILDS.reduce(
-      (prev, curr, i, arr) => {
-        var seperator = i>0?'&':'';
-        return prev + seperator + curr;
-      }, 
-      `${PROXY}:${PROXY_PORT}/q=`);
+  loadBuild (build) {
+    if(build) {
+      var url = `${PROXY}:${PROXY_PORT}?q=${build}`;
 
-    xhr.getJSON(url, (err, res) => {
-      ServerActionCreators.loadedBuilds(res);
-    });
+      xhr.getJSON(url, (err, res) => {
+        ServerActionCreators.loadedBuild(res);
+      });
+    }
   }
 };
 

@@ -2,10 +2,10 @@ var { ActionTypes } = require('../Constants');
 var AppDispatcher = require('../AppDispatcher');
 
 var ServerActionCreators = {
-  loadedBuilds (builds) {
+  loadedBuild (build) {
     AppDispatcher.handleServerAction({
-      type: ActionTypes.BUILDS_LOADED,
-      builds: builds
+      type: ActionTypes.BUILD_LOADED,
+      build: build
     });
   }
 };

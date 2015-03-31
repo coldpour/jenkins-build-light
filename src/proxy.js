@@ -5,33 +5,14 @@
   var Constants = require('./app/Constants');
   var PROXY = Constants.PROXY;
   var PROXY_PORT = Constants.PROXY_PORT;
+  var patchUrl = require('url-patch');
 
-  var patchProtocol = (url) => {
-    var protocolStr = 'http://';
-    if(!url.startsWith(protocolStr)) {
-      url = protocolStr + url;
-    }
-    return url;
-  };
-
-  var patchTrailingSlash = (url) => {
-    var lastIndex = url.length-1;
-    if(url.endsWith('/')) {
-      url = url.substr(0, lastIndex);
-    }
-    return url;
-  };
-
-  var patchUrl = (url) => {
-    return patchProtocol(patchTrailingSlash(url));
-  };
-
-  var parseJobs = (query) => {
-    if(query.startsWith('/q=')) {
-      query = query.substring(3, query.length);
+  var parseJob = (query) => {
+    if(query.startsWith('/?q=')) {
+      query = query.substring(4, query.length);
     }
     
-    return query.split('&').map(patchUrl).reduce(objectifyJobs, []);
+    return objectifyJob(query);
   };
 
   var parseUrl = (job) => {
@@ -42,16 +23,21 @@
     return job.substring(job.lastIndexOf('/job/') + 5, job.length);
   };
 
-  var objectifyJobs = (prev, curr, i, arr) => {
-    return prev.concat([{
-      url: parseUrl(curr),
-      name: parseName(curr)
-    }]);
+  var objectifyJob = (job) => {
+    return {
+      url: job,
+      patchedUrl: patchUrl(parseUrl(job)),
+      name: parseName(job)
+    };
   };
 
   var getJob = (job, cb) => {
-    var jenkins = jenkinsapi.init(job.url);
-    var jobInfo = {};
+    var jenkins = jenkinsapi.init(job.patchedUrl);
+    var jobInfo = {
+      job: undefined,
+      lastBuild: undefined,
+      url: job.url
+    };
 
     jenkins.job_info(job.name, (err, data) => {
       jobInfo.job = data;
@@ -63,15 +49,15 @@
   };
 
   var sendResponseJSON = (response, results) => {
-    // console.log('sending results', results);
     response.writeHead(200, { 'Content-Type': 'text/plain',
                               'Access-Control-Allow-Origin': '*' });
     response.end(JSON.stringify(results));
   };
 
   var server = http.createServer((req, res) => {
-    var jobs = parseJobs(req.url);
-    async.map(jobs, getJob, (err, results) => {
+    console.log(req.headers.origin, '\n', req.url, '\n');
+    var job = parseJob(req.url);
+    getJob(job, (err, results) => {
       sendResponseJSON(res, results);
     });
 
