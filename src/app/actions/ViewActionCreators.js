@@ -8,16 +8,13 @@ var ViewActionCreators = {
   },
 
   getBuildsFromUrl () {
-    var builds = [];
-    var url = location.href;
-    var slugIndex = url.indexOf(SLUG);
-    if (0 < slugIndex) {
-      var startIndex = slugIndex + SLUG.length;
-      var endIndex = url.length - 1;
-
-      var query = url.substr(startIndex, endIndex);
-      builds = query.split(DELIM);
-
+    var slugSplit = location.href.split(SLUG);
+    var host = slugSplit[0];
+    var query = slugSplit[1];
+    debugger;
+    if (query) {
+      var builds = query.split(DELIM);
+      
       AppDispatcher.handleViewAction({
         type: ActionTypes.BUILDS_GRABBED,
         builds: builds
