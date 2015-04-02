@@ -17,8 +17,10 @@ var setState = (newState) => {
 
 var update = (updates) => {
   var key = updates.url;
-  state.builds[key] = assign({}, state.builds[key], updates);
-  events.emit(CHANGE_EVENT);
+  if(state.builds.hasOwnProperty(key)) {
+    state.builds[key] = assign({}, state.builds[key], updates);
+    events.emit(CHANGE_EVENT);
+  }
 };
 
 var remove = (key) => {
