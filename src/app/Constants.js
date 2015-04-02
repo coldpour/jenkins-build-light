@@ -9,7 +9,9 @@ module.exports = {
 
   ActionTypes: keyMirror({
     BUILDS_GRABBED: null,
+    BUILD_ADDED: null,
     BUILD_LOADED: null,
+    BUILD_REMOVED: null,
     NO_QUERY: null
   }),
 

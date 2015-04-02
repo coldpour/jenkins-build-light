@@ -7,8 +7,7 @@ var events = new EventEmitter();
 var CHANGE_EVENT = 'CHANGE';
 
 var state = {
-  builds: {},
-  query: false
+  builds: {}
 };
 
 var setState = (newState) => {
@@ -20,6 +19,11 @@ var update = (updates) => {
   var key = updates.url;
   state.builds[key] = assign({}, state.builds[key], updates);
   events.emit(CHANGE_EVENT);
+};
+
+var remove = (key) => {
+  delete state.builds[key];
+  events.emit(CHANGE_EVENT);  
 };
 
 var createBuildsIfNeeded = (builds) => {
@@ -36,8 +40,7 @@ var createBuildsIfNeeded = (builds) => {
     return prev;
   }, {});
   setState({
-    builds: newBuilds,
-    query: true
+    builds: newBuilds
   });
 };
 
@@ -58,14 +61,15 @@ var BuildsStore = {
 BuildsStore.dispatchToken = AppDispatcher.register((payload) => {
   var { action } = payload;
   console.log('BuildsStore', action.type);
-  if (action.type === ActionTypes.BUILD_LOADED) {
+  if (action.type === ActionTypes.BUILD_REMOVED) {
+    remove(action.build);
+  } else if (action.type === ActionTypes.BUILD_LOADED) {
     update(action.build);
   } else if (action.type === ActionTypes.BUILDS_GRABBED) {
     createBuildsIfNeeded(action.builds);
   } else if (action.type === ActionTypes.NO_QUERY) {
     setState({
-      builds: {},
-      query: false
+      builds: {}
     });
   }
 });

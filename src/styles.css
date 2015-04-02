@@ -71,11 +71,20 @@
   text-decoration: none;
 }
 
+.close-btn {
+  position: absolute;
+  top: 0rem;
+  right: .3rem;
+  font-size: 1.2rem;
+}
+
+.close-btn--hidden {
+  display: none;
+}
+
 .light-stat {
-  bottom: -1rem;
   font-size: 1.2rem;
   opacity: .3;
-  position: relative;
 }
 
 .build-duration {
@@ -86,8 +95,10 @@
 
 .build-number {
   bottom: 0;
+  color: white;
   left: .3rem;
   position: absolute;
+  text-decoration: none;
 }
 
 .build-number:hover {
@@ -101,8 +112,10 @@
 }
 
 .build-name {
+  color: white;
   font-size: 2rem;
   margin: 0 auto;
+  text-decoration: none;
 }
 
 .build-name:hover {

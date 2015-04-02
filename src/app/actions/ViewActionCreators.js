@@ -11,7 +11,7 @@ var ViewActionCreators = {
     var builds = [];
     var url = location.href;
     var slugIndex = url.indexOf(SLUG);
-    if(0 < slugIndex) {
+    if (0 < slugIndex) {
       var startIndex = slugIndex + SLUG.length;
       var endIndex = url.length - 1;
 
@@ -30,12 +30,30 @@ var ViewActionCreators = {
   },
 
   addBuild (build) {
-    if(location.href.indexOf(SLUG) > 0) {
-      location.href += `${DELIM}${build}`;
+    var slugIndex = location.href.indexOf(SLUG);
+    if (slugIndex > 0) {
+      location.href += (DELIM + build);
     } else {
-      location.href += `${SLUG}${build}`;
+      location.href += (SLUG + build);
     }
     this.getBuildsFromUrl();
+  },
+
+  removeBuild (build) {
+    var slugSplit = location.href.split(SLUG);
+    var host = slugSplit[0];
+    var query = slugSplit[1];
+    var builds = query.split(DELIM);
+    var filteredBuilds = builds.filter((curr) => {
+      return curr !== build;
+    });
+    var filteredQuery = filteredBuilds.join(DELIM);
+    location.href = (host + SLUG + filteredQuery);
+
+    AppDispatcher.handleViewAction({
+      type: ActionTypes.BUILD_REMOVED,
+      build: build
+    });
   }
 };
 

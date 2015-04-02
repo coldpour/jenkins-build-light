@@ -4,13 +4,34 @@ var ViewActionCreators = require('../actions/ViewActionCreators.js');
 var { POLL_FREQUENCY } = require('../Constants.js');
 
 var BuildLight = React.createClass({
+  interval: undefined,
+
+  getInitialState () {
+    return {
+      hovered: false
+    };
+  },
+  
   componentDidMount () {
     var loadThisBuild = ViewActionCreators.loadBuild.bind(this, this.props.url);
     loadThisBuild();
-    window.setInterval(loadThisBuild, POLL_FREQUENCY);
+    interval = window.setInterval(loadThisBuild, POLL_FREQUENCY);
   },
 
   componentWillUnmount () {
+    window.clearInterval(interval);
+  },
+
+  mouseIn () {
+    this.setState({
+      hovered: true
+    });
+  },
+
+  mouseOut () {
+    this.setState({
+      hovered: false
+    });
   },
 
   render() {
@@ -18,13 +39,23 @@ var BuildLight = React.createClass({
     var color = (props.job && props.job.color) || 'grey';
     var url = props.url;
     var cls = 'light ' + color;
+
     return (
-        <a className={ `${this.props.className} ${cls}` } href={ url }>
+        <div className={ `${this.props.className} ${cls}` } onMouseOver={ this.mouseIn } onMouseOut={ this.mouseOut }>
+        <CloseButton show={ this.state.hovered } { ...props } />
         <BuildText { ...props } />
         <BuildNumber { ...props } />
         <BuildDuration { ...props } />
-        </a>
+        </div>
     );
+  }
+});
+
+var CloseButton = React.createClass({
+  render() {
+    var removeThisLight = ViewActionCreators.removeBuild.bind(ViewActionCreators, this.props.url);
+    var cls = `close-btn${this.props.show ? '' : ' close-btn--hidden'}`;
+    return <div className={ cls } onClick={ removeThisLight }>x</div>;
   }
 });
 
@@ -43,10 +74,12 @@ var BuildText = React.createClass({
 var BuildName = React.createClass({
   render() {
     var props = this.props;
-    var displayName = (props.job && props.job.displayName) || props.url || '';
+    var job = props.job;
+    var displayName = (job && job.displayName) || props.url || '';
+    var url = (job && job.url) || props.url;
     var name = displayName.replace(/#\d*/, '');
     return (
-        <div className='build-name'>{ name }</div>
+        <a className='build-name' href={ url }>{ name }</a>
     );
   }
 });
@@ -70,9 +103,11 @@ var BuildCulprits = React.createClass({
 var BuildNumber = React.createClass({
   render() {
     var props = this.props;
-    var number = (props.lastBuild && props.lastBuild.number) || '';
+    var lastBuild = props.lastBuild;
+    var number = (lastBuild && lastBuild.number) || '';
+    var url = (lastBuild && lastBuild.url);
     var str = number ? `#${number}` : '';
-    return <div className='light-stat build-number'>{ str }</div>;
+    return <a className='light-stat build-number' href={ url }>{ str }</a>;
   }
 });
 

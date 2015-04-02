@@ -22,13 +22,13 @@ var LightGrid = React.createClass({
   },
 
   render() {
-    var state = this.state;
-    var builds = state.builds;
+    var builds = this.state.builds;
     var keys = Object.keys(builds);
-    var cls = this._getLightSize(keys.length);
+    var numBuilds = keys.length;
+    var cls = this._getLightSize(numBuilds);
     var buildLights = [];
 
-    if(state.query) {
+    if(numBuilds > 0) {
       buildLights = keys.map((id) => {
         return <BuildLight key={ id } className={ cls } { ...builds[id] } />;
       });
