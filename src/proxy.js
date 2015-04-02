@@ -55,7 +55,8 @@
   };
 
   var server = http.createServer((req, res) => {
-    console.log(req.headers.origin, '\n', req.url, '\n');
+    var logMsg = new Date() + ' : ' + req.headers.origin + ' : ' + req.url;
+    console.log(logMsg);
     var job = parseJob(req.url);
     getJob(job, (err, results) => {
       sendResponseJSON(res, results);

@@ -4,25 +4,13 @@ var ViewActionCreators = require('../actions/ViewActionCreators.js');
 var { POLL_FREQUENCY } = require('../Constants.js');
 
 var BuildLight = React.createClass({
-  getInitialState () {
-    return {
-      loaded: false
-    };
-  },
-
   componentDidMount () {
-    BuildsStore.addChangeListener(this.handleStoreChange);
     var loadThisBuild = ViewActionCreators.loadBuild.bind(this, this.props.url);
     loadThisBuild();
     window.setInterval(loadThisBuild, POLL_FREQUENCY);
   },
 
   componentWillUnmount () {
-    BuildsStore.removeChangeListener(this.handleStoreChange);
-  },
-
-  handleStoreChange () {
-    this.setState(BuildsStore.getState().builds);
   },
 
   render() {
