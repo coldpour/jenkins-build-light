@@ -15,43 +15,27 @@
   float: right;
 }
 
-@-webkit-keyframes add-text-expand {
-  from {width: 0; display:none;}
-  to {width: 10rem; display:inline-block;}
-}
-
-/* Standard syntax */
-@keyframes add-text-expand {
-  from {width: 0; display: none;}
-  to {width: 10rem; display:inline-block;}
-}
-
-.expanded-add-text {
+.add-text {
   border: none;
   font-size: 1.2rem;
   height: 2.2rem;
   margin-right: .5rem;
   padding-left: .6rem;
   padding-right: .6rem;
-  width: 10rem;
-  /* Standard syntax */
-  animation: add-text-expand .5s;
-  /* Chrome, Safari, Opera */
-  -webkit-animation: add-text-expand .5s;
 }
 
-.collapsed-add-text {
-  margin-right: .5rem;
-  display: none;
-  height: 2.2rem;
-  font-size: 1.2rem;
-  border: none;
-  /* Standard syntax */
-  animation: add-text-expand .5s;
-  animation-direction: reverse;
-  /* Chrome, Safari, Opera */
-  -webkit-animation: add-text-expand .5s;
-  -webkit-animation-direction: reverse;
+.add-text--expanded {
+  width: 10rem;
+  opacity: 1;
+  -webkit-transition: width .5s, opacity .1s;
+  transition: width .5s, opacity .1s;
+}
+
+.add-text--collapsed {
+  width: 0;
+  opacity: 0;
+  -webkit-transition: width .5s, opacity .7s;
+  transition: width .5s, opacity .7s;
 }
 
 .light {
@@ -69,17 +53,29 @@
   position: relative;
   text-align: center;
   text-decoration: none;
+  -webkit-transition: background-color .5s;
+  transition: background-color .5s;
 }
 
 .close-btn {
-  position: absolute;
-  top: 0rem;
-  right: .3rem;
+  cursor: pointer;
   font-size: 1.2rem;
+  font-weight: normal;
+  position: absolute;
+  right: .3rem;
+  top: 0rem;
+}
+
+.close-btn--shown {
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
+  opacity: 1;
 }
 
 .close-btn--hidden {
-  display: none;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
+  opacity: 0;
 }
 
 .light-stat {

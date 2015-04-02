@@ -54,7 +54,7 @@ var BuildLight = React.createClass({
 var CloseButton = React.createClass({
   render() {
     var removeThisLight = ViewActionCreators.removeBuild.bind(ViewActionCreators, this.props.url);
-    var cls = `close-btn${this.props.show ? '' : ' close-btn--hidden'}`;
+    var cls = `close-btn close-btn--${this.props.show ? 'shown' : 'hidden'}`;
     return <div className={ cls } onClick={ removeThisLight }>x</div>;
   }
 });

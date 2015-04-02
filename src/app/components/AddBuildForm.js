@@ -11,11 +11,11 @@ var AddBuildForm = React.createClass({
   render () {
     var btnName = 'addBtn';
     var btnCls = 'add-btn';
-    var textCls = `${this.state.collapsed ? 'collapsed' : ' expanded'}-add-text`;
+    var textCls = 'add-text add-text--' + (this.state.collapsed ? 'collapsed' : 'expanded');
     return (
         <div className='add-build-form'>
-        { !this.state.collapsed ? <input type='text' tabIndex='1' className={ textCls } ref='addText' placeholder='job url' onKeyDown={ this.keyDown } onKeyPress={ this.keyPress } /> : null }
-        <button className={ btnCls } ref='addBtn' onClick={ this.state.collapsed ? this.expand : this.submit }>+</button>
+        <input type='text' className={ textCls } ref='addText' placeholder='job url' onKeyDown={ this.keyDown } onKeyPress={ this.keyPress } />
+        <button className={ btnCls } tabIndex='1' ref='addBtn' onClick={ this.state.collapsed ? this.expand : this.submit }>+</button>
         </div>
     );
   },
@@ -25,19 +25,15 @@ var AddBuildForm = React.createClass({
       this.submit();
     } else if('Escape' === e.key) {
       this.collapse();
-    } else {
-      console.log('keyDown:', e.key);
     }
     e.stopPropagation();
   },
 
   keyPress (e) {
-    console.log('form keyPress:', e.key);
     e.stopPropagation();
   },
 
   expand () {
-    console.log('form expanding');
     this.setState({
       collapsed: false
     }, () => {
@@ -46,18 +42,17 @@ var AddBuildForm = React.createClass({
   },
 
   collapse () {
-    console.log('form collapsing');
     this.setState({
       collapsed: true
     });
   },
 
   submit () {
-    console.log('form submit');
     var text = this.refs.addText.getDOMNode().value;
     if(text) {
       this.collapse();
       ViewActionCreators.addBuild(text);
+      this.refs.addText.getDOMNode().value = '';
     }
   }
 });
