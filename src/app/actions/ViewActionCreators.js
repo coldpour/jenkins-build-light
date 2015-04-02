@@ -47,8 +47,13 @@ var ViewActionCreators = {
     var filteredBuilds = builds.filter((curr) => {
       return curr !== build;
     });
-    var filteredQuery = filteredBuilds.join(DELIM);
-    location.href = (host + SLUG + filteredQuery);
+
+    if(filteredBuilds.length > 0) {
+      var filteredQuery = filteredBuilds.join(DELIM);
+      location.href = (host + SLUG + filteredQuery);
+    } else {
+      location.href = host;
+    }
 
     AppDispatcher.handleViewAction({
       type: ActionTypes.BUILD_REMOVED,
