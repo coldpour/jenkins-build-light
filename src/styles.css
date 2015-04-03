@@ -76,6 +76,7 @@
   -webkit-transition: opacity .5s;
   transition: opacity .5s;
   opacity: 0;
+  pointer-events: none;
 }
 
 .light-stat {
