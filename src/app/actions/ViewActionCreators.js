@@ -11,7 +11,6 @@ var ViewActionCreators = {
     var slugSplit = location.href.split(SLUG);
     var host = slugSplit[0];
     var query = slugSplit[1];
-    debugger;
     if (query) {
       var builds = query.split(DELIM);
       
@@ -27,11 +26,18 @@ var ViewActionCreators = {
   },
 
   addBuild (build) {
-    var slugIndex = location.href.indexOf(SLUG);
-    if (slugIndex > 0) {
-      location.href += (DELIM + build);
+    var slugSplit = location.href.split(SLUG);
+    var host = slugSplit[0];
+    var query = slugSplit[1];
+    if (query) {
+      var builds = query.split(DELIM);
+      if (builds.indexOf(build) === -1) {
+        var newBuilds = builds.concat([build]);
+        var newQuery = newBuilds.join(DELIM);
+        location.href = (host + SLUG + newQuery);
+      }
     } else {
-      location.href += (SLUG + build);
+      location.href = (host + SLUG + build);
     }
     this.getBuildsFromUrl();
   },
