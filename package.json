@@ -20,6 +20,7 @@
     "react": "0.12.2",
     "react-router": "0.11.6",
     "sort-by": "1.1.0",
+    "url-patch": "^0.1.0",
     "webpack": "1.4.15",
     "webpack-dev-server": "1.7.0"
   },
