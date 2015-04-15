@@ -1,5 +1,8 @@
 # Jenkins Build Light
 
+[![Stories in Ready](https://badge.waffle.io/coldpour/jenkins-build-light.png?label=ready&title=Ready)](https://waffle.io/coldpour/jenkins-build-light)
+
+## About
 Webapp that displays the status of several jenkins jobs even across multiple servers.
 
 ![JenkinsBuildLight](JenkinsBuildLight.png)
