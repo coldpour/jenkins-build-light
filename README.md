@@ -41,7 +41,6 @@ The lights you've added get put up in the URL, so to save the View you've set up
 git clone https://github.com/coldpour/jenkins-build-light.git
 cd jenkins-build-light
 npm install
-bin/proxy &
 npm start
 ```
 
@@ -53,9 +52,12 @@ will not live reload however, so any changes you make there will need to bounce 
 
 The app will also be hosted at http://localhost:8080, but it won't receive live updates.
 
+`npm stop` will kill the proxy server and the webpack server.
+
 ## Configuration
 
 For the moment, all configuration lives in `src/app/Constants.js`.
 
 ### PROXY
+
 To set up a server that other people can connect to, you'll need to change the `PROXY` to either an IP or a DNS hostname. Leaving the `PROXY=http://localhost` will pretty much only work for local development.

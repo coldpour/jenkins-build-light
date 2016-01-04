@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "description": "webapp that displays the status of several jenkins jobs even across multiple servers",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors",
-    "proxy": "./bin/proxy.js"
+    "prestart": "mkdir -p logs",
+    "start": "npm run start:proxy && npm run start:server",
+    "start:proxy": "bin/proxy > logs/proxy.log &",
+    "start:server": "webpack-dev-server --progress --colors &> logs/server.log &",
+    "stop": "npm run stop:server; npm run stop:proxy",
+    "stop:proxy": "kill `ps | grep node.*bin/proxy | grep -v grep | cut -f 1 -d ' '` 2> /dev/null && echo proxy stopped || echo proxy already stopped",
+    "stop:server": "kill `ps | grep jenkins-build-light.*webpack | grep -v grep | cut -f 1 -d ' '` 2> /dev/null && echo server stopped || echo server already stopped"
   },
   "author": "Mike Holm <coldpour@gmail.com>",
   "license": "MIT",
