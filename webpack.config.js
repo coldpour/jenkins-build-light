@@ -1,9 +1,3 @@
-var fs = require('fs');
-var path = require('path');
-var webpack = require('webpack');
-var CODE = __dirname+'/src';
-var React = require('react');
-
 module.exports = {
   entry: './src/app.js',
 
