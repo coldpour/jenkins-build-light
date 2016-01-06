@@ -2,8 +2,9 @@ var jenkinsapi = require('jenkins-api');
 var patchUrl = require('url-patch');
 
 var parseJob = (query) => {
-  if(query.startsWith('/?q=')) {
-    query = query.substring(4, query.length);
+  var prefix = '/';
+  if(query.startsWith(prefix)) {
+    query = query.substring(prefix.length, query.length);
   }
   
   return objectifyJob(query);
@@ -42,17 +43,10 @@ var getJob = (job, cb) => {
   });
 };
 
-var sendResponseJSON = (response, results, next) => {
-  response.send(JSON.stringify(results));
-};
-
 module.exports = (req, res, next) => {
-  if(/\/\?q=.*/.test(req.url)) {
-    var job = parseJob(req.url);
-    getJob(job, (err, results) => {
-      sendResponseJSON(res, results);
-    });
-  } else {
+  var job = parseJob(req.url);
+  getJob(job, (err, results) => {
+    res.send(JSON.stringify(results));
     next();
-  }
+  });
 };

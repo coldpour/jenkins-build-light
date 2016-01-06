@@ -5,7 +5,7 @@ var ServerActionCreators = require('../actions/ServerActionCreators');
 var ApiUtils = {
   loadBuild (build) {
     if(build) {
-      var url = `${PROXY}:${PROXY_PORT}?q=${build}`;
+      var url = `/q/${build}`;
 
       xhr.getJSON(url, (err, res) => {
         ServerActionCreators.loadedBuild(res);

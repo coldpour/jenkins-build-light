@@ -41,17 +41,24 @@ The lights you've added get put up in the URL, so to save the View you've set up
 git clone https://github.com/coldpour/jenkins-build-light.git
 cd jenkins-build-light
 npm install
+npm run dev
+```
+
+Then visit [http://localhost:8080](http://localhost:8080).
+
+After you make changes, press CTRL+C and rerun `npm run dev`.
+
+## To Run In Prod
+
+In prod mode, logging is funneled to the `logs` directory.
+
+Simpley use `npm start` instead of `npm run dev`.
+
+```bash
+git clone https://github.com/coldpour/jenkins-build-light.git
+cd jenkins-build-light
+npm install
 npm start
 ```
 
-Then visit http://localhost:9090.
-
-After you make changes, `npm restart`.
-
-## Configuration
-
-For the moment, all configuration lives in `src/app/Constants.js`.
-
-### PROXY
-
-To set up a server that other people can connect to, you'll need to change the `PROXY` to either an IP or a DNS hostname. Leaving the `PROXY=http://localhost` will pretty much only work for local development.
+`npm stop` and `npm restart` will stop or bounce the server.
