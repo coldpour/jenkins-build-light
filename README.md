@@ -5,7 +5,7 @@
 ## About
 Webapp that displays the status of several jenkins jobs even across multiple servers.
 
-![JenkinsBuildLight](JenkinsBuildLight.png)
+![Screenshot](Screenshot.png)
 
 ## Usage
 
@@ -44,15 +44,9 @@ npm install
 npm start
 ```
 
-Then visit http://localhost:8080/webpack-dev-server/bundle.
+Then visit http://localhost:9090.
 
-This runs the webpack dev server, any changes you make to javascript or css
-files in `src` will cause the browser to reload live. The proxy server code
-will not live reload however, so any changes you make there will need to bounce the proxy.
-
-The app will also be hosted at http://localhost:8080, but it won't receive live updates.
-
-`npm stop` will kill the proxy server and the webpack server.
+After you make changes, `npm restart`.
 
 ## Configuration
 

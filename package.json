@@ -3,28 +3,25 @@
   "version": "0.1.0",
   "description": "webapp that displays the status of several jenkins jobs even across multiple servers",
   "scripts": {
-    "prestart": "mkdir -p logs",
-    "start": "npm run start:proxy && npm run start:server",
-    "start:proxy": "node src/proxy.js > logs/proxy.log &",
-    "start:server": "webpack-dev-server --progress --colors &> logs/server.log &",
-    "stop": "npm run stop:server; npm run stop:proxy",
-    "stop:proxy": "kill `ps | grep node.*bin/proxy | grep -v grep | cut -f 1 -d ' '` 2> /dev/null && echo proxy stopped || echo proxy already stopped",
-    "stop:server": "kill `ps | grep jenkins-build-light.*webpack | grep -v grep | cut -f 1 -d ' '` 2> /dev/null && echo server stopped || echo server already stopped"
+    "prestart": "webpack && mkdir -p logs",
+    "start": "node index.js &> logs/server.log &",
+    "stop": "kill `lsof -t -iTCP:9090 -sTCP:LISTEN` 2> /dev/null || exit 0"
   },
   "author": "Mike Holm <coldpour@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.13.3",
     "flux": "2.0.1",
     "jenkins-api": "^0.2.6",
     "jsx-loader": "0.12.2",
     "react": "0.12.2",
-    "url-patch": "^0.1.0",
-    "webpack": "1.4.15",
-    "webpack-dev-server": "1.7.0"
+    "url-patch": "^0.1.0"
   },
   "devDependencies": {
     "css-loader": "^0.9.1",
-    "style-loader": "^0.8.3"
+    "style-loader": "^0.8.3",
+    "webpack": "1.4.15",
+    "webpack-dev-server": "1.7.0"
   },
   "repository": "https://github.com/coldpour/jenkins-build-light.git"
 }

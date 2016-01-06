@@ -20,4 +20,3 @@ module.exports = {
     VIEW_ACTION: null
   })
 };
-
