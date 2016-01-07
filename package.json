@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "description": "webapp that displays the status of several jenkins jobs even across multiple servers",
   "scripts": {
-    "dev": "webpack && node index.js",
-    "prestart": "webpack && mkdir -p logs",
-    "start": "node index.js &> logs/server.log &",
+    "docker": "npm run docker:build && npm run docker:run && npm run docker:open",
+    "docker:build": "docker build -t buildlight .",
+    "docker:open": "bin/opendockerapp.sh",
+    "docker:run": "docker run -d -P -t buildlight",
+    "prestart": "webpack",
     "stop": "kill `lsof -t -iTCP:8080 -sTCP:LISTEN` 2> /dev/null && echo server stopped || exit 0"
   },
   "author": "Mike Holm <coldpour@gmail.com>",
