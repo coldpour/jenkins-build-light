@@ -112,27 +112,39 @@ var BuildNumber = React.createClass({
 });
 
 var BuildDuration = React.createClass({
-  format(ms) {
-    var x = ms / 1000;
-    var seconds = Math.floor(x % 60);
-    x /= 60;
-    var minutes = Math.floor(x % 60);
-    x /= 60;
-    var hours = Math.floor(x % 24);
-    var str = hours > 0 ? `${hours}h` : '';
-    str += minutes > 0 ? ` ${minutes}m` : '';
-    str += seconds > 0 ? ` ${seconds}s` : '';
+  format(ms, omitStr) {
+    var showH = true;
+    var showM = true;
+    var showS = true;
+
+    if(omitStr) {
+      if(/s/.test(omitStr)) showS = false;
+      if(/m/.test(omitStr)) showM = false;
+      if(/h/.test(omitStr)) showH = false;
+    }
+    
+    var s = ms / 1000;
+    var seconds = Math.floor(s % 60);
+    var m = s / 60;
+    var minutes = Math.floor(m % 60);
+    var h = m / 60;
+    var hours = Math.floor(h % 24);
+    var str = showH && hours > 0 ? `${hours}h` : '';
+    str += showM && minutes > 0 ? ` ${minutes}m` : '';
+    str += showS && seconds > 0 ? ` ${seconds}s` : '';
     return str;
   },
 
   render() {
     var { building, estimatedDuration, duration, timestamp } = this.props.lastBuild || {};
-    var timeStr = this.format(duration);
+    var endTime = timestamp + duration;
+    var timeSince = this.format(Date.now() - endTime, 's');
+    var timeStr = !!timeSince ? `${timeSince} ago` : '';
 
     if(building) {
-      var fElapsed = this.format(Date.now() - timestamp);
-      var fEstimate = this.format(estimatedDuration);
-      timeStr = `${fElapsed} | ${fEstimate}`;
+      var elapsed = this.format(Date.now() - timestamp);
+      var estimate = this.format(estimatedDuration);
+      timeStr = `${elapsed} | ${estimate}`;
     }
 
     return <div className='light-stat build-duration'>{ timeStr }</div>;
