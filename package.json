@@ -5,7 +5,7 @@
   "scripts": {
     "docker": "npm run docker:build && npm run docker:run && npm run docker:open",
     "docker:build": "docker build -t coldpour/jenkins-build-light .",
-    "docker:kill": "docker kill jenkins_build_light"
+    "docker:kill": "docker kill jenkins_build_light",
     "docker:open": "bin/opendockerapp.sh",
     "docker:run": "docker run --name=jenkins_build_light -d -P -t coldpour/jenkins-build-light",
     "prestart": "webpack",
