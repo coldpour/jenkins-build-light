@@ -1,7 +1,6 @@
 # Jenkins Build Light
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/coldpour/jenkins-build-light.svg)](https://hub.docker.com/r/coldpour/jenkins-build-light/)
-[![Stories in Ready](https://badge.waffle.io/coldpour/jenkins-build-light.png?label=ready&title=Ready)](https://waffle.io/coldpour/jenkins-build-light)
 
 ## About
 Webapp that displays the status of several jenkins jobs even across multiple servers.
@@ -38,22 +37,7 @@ The lights you've added get put up in the URL, so to save the View you've set up
 
 ## To Hack
 
-```bash
-git clone https://github.com/coldpour/jenkins-build-light.git
-cd jenkins-build-light
-npm install
-npm run dev
-```
-
-Then visit [http://localhost:8080](http://localhost:8080).
-
-After you make changes, press CTRL+C and rerun `npm run dev`.
-
-## To Run In Prod
-
-In prod mode, logging is funneled to the `logs` directory.
-
-Simpley use `npm start` instead of `npm run dev`.
+I'm tracking my work on my waffle board. [![Stories in Ready](https://badge.waffle.io/coldpour/jenkins-build-light.png?label=ready&title=Ready)](https://waffle.io/coldpour/jenkins-build-light)
 
 ```bash
 git clone https://github.com/coldpour/jenkins-build-light.git
@@ -62,4 +46,6 @@ npm install
 npm start
 ```
 
-`npm stop` and `npm restart` will stop or bounce the server.
+Then visit [http://localhost:8080](http://localhost:8080).
+
+After you make changes, press CTRL+C and rerun `npm start`.
