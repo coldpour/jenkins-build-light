@@ -1,5 +1,6 @@
 # Jenkins Build Light
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/coldpour/jenkins-build-light.svg)](https://hub.docker.com/r/coldpour/jenkins-build-light/)
 [![Stories in Ready](https://badge.waffle.io/coldpour/jenkins-build-light.png?label=ready&title=Ready)](https://waffle.io/coldpour/jenkins-build-light)
 
 ## About
